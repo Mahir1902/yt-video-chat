@@ -65,7 +65,7 @@ export default async function page({ params: { chatId } }: Props) {
           {/* heading */}
           <div className=" flex items-center justify-center px-5 mb-4 h-[5rem] gap-3 mt-4 ">
             <Image
-              className="w-100 h-100 rounded-lg"
+              className="w-100 h-100 rounded-lg hidden lg:block"
               src={chat.thumbnailUrl!}
               alt=""
               width={120}

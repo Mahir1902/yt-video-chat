@@ -8,8 +8,12 @@ import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { IoSend } from 'react-icons/io5';
 import axios from 'axios';
-import { useQuery } from 'react-query';
+import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { BiLoaderAlt } from "react-icons/bi";
+import { FaRegTrashAlt } from "react-icons/fa";
+import { deleteChat } from '@/lib/delete-chat';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 type Props = {
   videoLink:string,
@@ -74,6 +78,30 @@ export default function ChatBox({videoLink, chatId}: Props) {
   //   }
   // }, [messages])
 
+
+  // ===================== Delete Chat =====================
+
+    const queryClient = useQueryClient()
+
+    const router = useRouter()
+
+    const deleteMutation = useMutation(deleteChat, {
+      onSuccess: (data) => {
+          toast.success(data.message)
+          queryClient.invalidateQueries('chats')
+          router.push('/')
+      },
+      onError: (error) => {
+          toast.error('Error deleting chat')
+          console.log(error)
+      }
+    })
+
+    const handleDelete = async() => {
+      const chatIdNumber = +chatId
+      deleteMutation.mutate(chatIdNumber)
+    }
+
   
 
   return (
@@ -114,11 +142,14 @@ export default function ChatBox({videoLink, chatId}: Props) {
             )}
           </div>
           <form onSubmit={handleSubmit} className="mx-2 mb-4 flex gap-2 items-center ">
-            
+            <div className='flex w-full gap-3'>
+
             <Input className="focus-visible:ring-transparent" type="text" value={input} placeholder="Ask me something..." onChange={handleInputChange}/>
             <Button type="submit" className="flex-none flex items-center justify-center disabled:opacity-50 transition" disabled={isLoading || input.length === 0} title="Submit Message">
               <IoSend />
             </Button>
+            <Button className='' variant={'destructive'} onClick={handleDelete}><FaRegTrashAlt className='w-4 h-4'/></Button>
+            </div>
           </form>
         </div>
   )

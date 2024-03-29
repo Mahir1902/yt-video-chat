@@ -24,22 +24,22 @@ export async function POST(req:Request, res:Response) {
     const videoDetails = await fetchVideoDetails(videoId)
 
     // Get the transcript of the video from the youtube link
-    const transcript = await YoutubeTranscript.fetchTranscript(videoLink);
+    // const transcript = await YoutubeTranscript.fetchTranscript(videoLink);
     
-    // console.log(transcript)
+    // // console.log(transcript)
 
-    // Transcript is in chunks, so we join them to get the whole text
-    const wholeText = transcript.map((textObj) => textObj.text).join(" ");
+    // // Transcript is in chunks, so we join them to get the whole text
+    // const wholeText = transcript.map((textObj) => textObj.text).join(" ");
 
 
-    // Define the path for the new file to save whole text into
-    const filePath = path.join(process.cwd(), 'texts', 'transcript.txt');
+    // // Define the path for the new file to save whole text into
+    // const filePath = path.join(process.cwd(), 'texts', 'transcript.txt');
 
-    // Write the wholeText to a file in the texts directory
-    fs.writeFileSync(filePath, wholeText, 'utf8')
+    // // Write the wholeText to a file in the texts directory
+    // fs.writeFileSync(filePath, wholeText, 'utf8')
 
     // Split the text into chunks 
-    const docs = await textSplitter()
+    const docs = await textSplitter(videoLink)
     // console.log(docs)
     console.log('Splitting successfull')
 

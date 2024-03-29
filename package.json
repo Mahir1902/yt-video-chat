@@ -16,10 +16,12 @@
     "@radix-ui/react-slot": "^1.0.2",
     "ai": "^2.2.34",
     "axios": "^1.6.7",
+    "canvas": "^2.11.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "dotenv": "^16.4.1",
     "drizzle-orm": "^0.29.3",
+    "firebase": "^10.9.0",
     "http-status-codes": "^2.3.0",
     "langchain": "^0.1.14",
     "lucide-react": "^0.323.0",
@@ -33,7 +35,8 @@
     "react-query": "^3.39.3",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
-    "youtube-transcript": "^1.0.6"
+    "youtube-transcript": "^1.1.0",
+    "youtubei.js": "^5.8.0"
   },
   "devDependencies": {
     "@types/node": "^20",
